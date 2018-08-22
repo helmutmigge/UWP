@@ -10,25 +10,19 @@
     <Page.Resources>
         <x:String x:Key="DefaultContent">Test Content</x:String>
         <SolidColorBrush x:Key="DefaultBackgroundButton" Color="Blue"></SolidColorBrush>
+        <SolidColorBrush x:Key="DefaultBorderBrushButton" Color="Black"></SolidColorBrush>
+        <SolidColorBrush x:Key="DefaultForegroundBrushButton" Color="Green"></SolidColorBrush>
 
         <Style TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate  TargetType="Button">
                         <Border x:Name="RootBorder" 
-                                BorderBrush="{TemplateBinding BorderBrush}" 
-                                CornerRadius="50"
+                                BorderBrush="{StaticResource DefaultBorderBrushButton}" 
+                                CornerRadius="360"
                                 BorderThickness="{TemplateBinding BorderThickness}"  
-                                Background="{TemplateBinding Background}">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup>
-                                    <VisualState x:Name="Normal">
-                                        <Storyboard>
-                                            <PointerUpThemeAnimation Storyboard.TargetName="RootBorder" />
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
+                                Background="{StaticResource DefaultBackgroundButton}" >
+
                             <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" 
                                 Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
@@ -40,6 +34,35 @@
                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                 Padding="{TemplateBinding Padding}" 
                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup  x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootBorder" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="CornerRadius" Storyboard.TargetName="RootBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="40"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootBorder"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource DefaultForegroundBrushButton}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootBorder"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -55,8 +78,8 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Button Content="{StaticResource DefaultContent}" Background="{StaticResource DefaultBackgroundButton}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" />
-        <Button Content="test" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center"/>
+        <Button Content="{StaticResource DefaultContent}" Background="{StaticResource DefaultBackgroundButton}" HorizontalAlignment="Center" Height="300" VerticalAlignment="Center" Width="300" />
+        <Button Content="test" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Width="300" Height="300"/>
     </Grid>
 </Page>
 
