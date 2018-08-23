@@ -17,7 +17,9 @@ namespace ItemControl
                     new Person("Helmut", 35),
                     new Person("Eduardo", 38),
                     new Person("Bruno", 32),
-                    new Person("Galvão", 38)
+                    new Person("Galvão", 38),
+                    new Person("Douglas", 14),
+                    new Person("Jair", 11)
                 };
             }
         }

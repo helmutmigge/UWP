@@ -10,12 +10,17 @@
 
     <Page.Resources>
         <local:PersoinService x:Key="service"/>
+        <local:AgeToColorConverter x:Key="AgeToColorConverter" />
+        
         <DataTemplate x:Key="template" x:DataType="local:Person">
+            
             <StackPanel>
-                <TextBlock x:Name="namePerson" Text="{x:Bind Name}"/>
-                <TextBox  x:Name="agePerson" Text="{x:Bind Age,Mode=TwoWay}"/>  
+                <TextBlock x:Name="namePerson" Text="{Binding Name}"/>
+                <TextBox  x:Name="agePerson" Text="{Binding Age,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{Binding Path=Age,Mode=OneWay,Converter={StaticResource AgeToColorConverter }}"  Foreground="{Binding Age,Mode=OneWay,Converter={StaticResource AgeToColorConverter }}"/>
+                <TextBlock x:Name="ageBlockPerson" Text="{Binding Age,Mode=OneWay}"/>
             </StackPanel>
         </DataTemplate>
+        
     </Page.Resources>
     <Grid>
         <ItemsControl ItemsSource="{Binding People ,Source={StaticResource service}}" ItemTemplate="{StaticResource template}"/>
