@@ -1,0 +1,33 @@
+﻿<Page
+    x:Class="Binding.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Binding"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <local:Person x:Key="person1" Fullname="Helmut Migge" Nickname="Migge" />
+
+    </Page.Resources>
+
+    <Page.DataContext>
+        <local:Person Fullname="Eduardo" Nickname="Dudu" />
+    </Page.DataContext>
+    
+    <StackPanel Orientation="Vertical" Padding="10">
+        <StackPanel Orientation="Vertical" Background="#265e96">
+            <TextBlock Text="{Binding Fullname}" FontSize="20"/>
+            <TextBlock Text="{Binding Nickname}" FontSize="14"/>
+            <Slider Name="Source" Value="50"/>
+            <Slider Name="Target" Value="{Binding Value, ElementName=Source,Mode=TwoWay}"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Background="#e79191">
+            <TextBlock Text="{Binding Fullname,Source={StaticResource person1}}" FontSize="20"/>
+            <TextBlock Text="{Binding Nickname,Source={StaticResource person1}}" FontSize="14"/>
+        </StackPanel>
+    </StackPanel>
+</Page>
+
+    
