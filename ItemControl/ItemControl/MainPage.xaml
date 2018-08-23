@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="ItemControl.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ItemControl"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <local:PersoinService x:Key="service"/>
+        <DataTemplate x:Key="template" x:DataType="local:Person">
+            <StackPanel>
+                <TextBlock x:Name="namePerson" Text="{x:Bind Name}"/>
+                <TextBox  x:Name="agePerson" Text="{x:Bind Age,Mode=TwoWay}"/>  
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid>
+        <ItemsControl ItemsSource="{Binding People ,Source={StaticResource service}}" ItemTemplate="{StaticResource template}"/>
+    </Grid>
+</Page>
