@@ -11,6 +11,42 @@
 
     <Grid>
         <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="width">
+                <VisualState  x:Name="Normalwidth">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="rec.Fill">
+                            <Setter.Value>
+                                <Color>#30c6fa</Color>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState  x:Name="Smallwidth">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="rec.Fill">
+                            <Setter.Value>
+                                <Color>#635081</Color>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState  x:Name="Hiddenwidth">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="300"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="rec.Visibility" Value="Collapsed">
+                        </Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+
             <VisualStateGroup x:Name="Example">
                 <VisualState  x:Name="Normal">
                     <VisualState.Setters>
@@ -58,6 +94,6 @@
             <TextBlock Name="StateText" Text="Stage1" VerticalAlignment="Center" Height="200"/>
             <Button Content="Click Me" HorizontalAlignment="Stretch"/>
         </StackPanel>
-        <Rectangle x:Name="rec" Grid.Column="1" Grid.RowSpan="2" Fill="#FFC9C1C1" />
+        <Rectangle x:Name="rec" Grid.Column="1" Grid.RowSpan="2" Fill="#FFC9C1C1"  />
     </Grid>
 </Page>
