@@ -24,7 +24,10 @@ namespace Button
     {
         public MainPage()
         {
-            this.InitializeComponent();            
+            this.InitializeComponent();
+
+            var a = 20;
+            var b = a / 2;
         }
     }
 }
